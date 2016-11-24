@@ -1,5 +1,5 @@
 ## 安装
-`git clone https://github.com/mahavira/avalon-boilerplate.git`
+`git clone https://github.com/orgrinDataOrganization/orgrinData.git`
 
 1. cd avalon-boilerplate
 2. npm install
