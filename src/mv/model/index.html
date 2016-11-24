@@ -1,0 +1,31 @@
+<div :controller="modelList" class="modelList">
+    <h3 class="title">扩展模型列表</h3>
+    <div class="clearfix searchbox">
+        <div class="pull-left serchLeft">
+            <i class="glyphicon glyphicon-search" ms-click="@search()"></i>
+            <input type="text" name="text" class="search" ms-duplex="@searchText" placeholder="按系统和关键字查询指定模型"/>
+        </div>
+        <i class="glyphicon glyphicon-plus pull-right addNew" :click="@onNewModel"></i>
+    </div>
+    <hr/>
+    <div class="list-group">
+        <li :for="el in @data" href="javascript:;" :class="['list-group-item',(@pid==el.clientsys && 'open')]">
+
+            <div class="cateName active" :click="@clickHandleCategory(el)"><span>{{el.clientsys}}</span>
+                <i :class="['glyphicon', (@pid==el.clientsys ?'glyphicon-chevron-up':'glyphicon-chevron-down'),'pull-right']"></i>
+            </div>
+            <div class="list-group-items">
+                <a :for="elem in el.list" href="javascript:;" :class="[(elem.id==@id && 'active')]"
+                   :click="@clickHandle(elem)">{{elem.name}}
+                    <span class="Catgoryedit pull-right" :visible="elem.id==@id">
+                        <i class="glyphicon glyphicon-th-list" :click="@onNewModelBySimilar"></i>
+                        <i class="glyphicon glyphicon-trash" style="margin-left: 10px;" :click="@onDelete"></i>
+                    </span>
+                </a>
+            </div>
+        </li>
+    </div>
+
+    <ms-dialog :widget="@config" :controller="newModel">
+    </ms-dialog>
+</div>

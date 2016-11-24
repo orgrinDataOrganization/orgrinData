@@ -1,0 +1,118 @@
+{
+  "Status": "OK",
+  "Code": "",
+  "Msg": "",
+  "Data": [
+    {
+      "CheckService": "",
+      "CleintSys": "metadata",
+      "Code": "meta_model1",
+      "Comment": "",
+      "Fields": [
+        {
+          "Code": "Name",
+          "DataType": "string",
+          "Length": "20",
+          "Name": "模型名称",
+          "NotNull": "Y",
+          "WidgetType": "text"
+        },
+        {
+          "Code": "Code",
+          "DataType": "string",
+          "Length": "50",
+          "Name": "模型编码",
+          "NotNull": "Y",
+          "WidgetType": "text"
+        },
+        {
+          "Code": "CheckService",
+          "DataType": "string",
+          "Length": "100",
+          "Name": "校验服务",
+          "NotNull": "N",
+          "WidgetType": "text"
+        },
+        {
+          "Code": "CleintSys",
+          "DataType": "string",
+          "Length": "100",
+          "Name": "所属系统",
+          "NotNull": "N",
+          "WidgetType": "text"
+        },
+        {
+          "Code": "Comment",
+          "DataType": "string",
+          "Length": "50",
+          "Name": "说明文本",
+          "NotNull": "N",
+          "WidgetType": "text"
+        }
+      ],
+      "Name": "元数据模型1",
+      "_id": "57f5f9503c8cee54f9db04b1"
+    },
+    {
+      "CheckService": "",
+      "CleintSys": "metadata",
+      "Code": "meta_model2",
+      "Comment": "",
+      "Fields": [
+        {
+          "Code": "Name",
+          "DataType": "string",
+          "Length": "20",
+          "Name": "模型名称",
+          "NotNull": "Y",
+          "WidgetType": "text"
+        },
+        {
+          "Code": "Code",
+          "DataType": "string",
+          "Length": "50",
+          "Name": "模型编码",
+          "NotNull": "Y",
+          "WidgetType": "text"
+        },
+        {
+          "Code": "CheckService",
+          "DataType": "string",
+          "Length": "100",
+          "Name": "校验服务",
+          "NotNull": "N",
+          "WidgetType": "text"
+        },
+        {
+          "Code": "CleintSys",
+          "DataType": "string",
+          "Length": "100",
+          "Name": "所属系统",
+          "NotNull": "N",
+          "WidgetType": "text"
+        },
+        {
+          "Code": "Comment",
+          "DataType": "string",
+          "Length": "50",
+          "Name": "说明文本",
+          "NotNull": "N",
+          "WidgetType": "text"
+        }
+      ],
+      "Name": "元数据模型2",
+      "_id": "57f5f9503c8cee54f9db04b1"
+    }
+  ],
+  "Time": 1476328827,
+  "Page": {
+    "Count": 0,
+    "PageRowNum": 10,
+    "PageCount": 0,
+    "StartIndex": 0,
+    "EndIndex": 0,
+    "Page": -1
+  }
+}
+
+

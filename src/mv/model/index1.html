@@ -1,0 +1,34 @@
+<div :controller="modelList" class="modelList">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">扩展模型列表</h3>
+        </div>
+        <div class="panel-body">
+            <div class="input-group" style="margin: 15px 0;">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ms-click="@search()"><i class="glyphicon glyphicon-search"></i></button>
+        </span>
+                <input type="text"  name="text" class="form-control" ms-duplex="@searchText" placeholder="按系统和关键字查询指定模型类型"/>
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" :click="@onNewModel"><i class="glyphicon glyphicon-plus"></i></button>
+        </span>
+            </div>
+            <hr/>
+            <div class="list-group">
+                <li :for="el in @data" href="javascript:;" :class="['list-group-item',(@pid==el._id && 'open')]">
+
+                    <span :click="@clickHandleCategory(el)">{{el.Name}}</span>
+                    <i :class="['glyphicon', (@pid==el._id ?'glyphicon-chevron-up':'glyphicon-chevron-down'),'pull-right']"></i>
+                    <div class="list-group-items">
+                        <a :for="elem in el.Fields" href="javascript:;" :class="[(elem.Code==@id && 'active')]"
+                           :click="@clickHandle(elem)">{{elem.Name}}<span class="pull-right" :visible="elem.Code==@id"><i class="glyphicon glyphicon-th-list" :click="@onNewModelBySimilar"></i><i class="glyphicon glyphicon-trash" style="margin-left: 10px;" :click="@onDelete"></i></span></a>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <ms-dialog :widget="@config" :controller="newModel">
+    </ms-dialog>
+</div>

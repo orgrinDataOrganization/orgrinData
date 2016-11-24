@@ -1,0 +1,92 @@
+@charset "utf-8";
+/* CSS Document */
+.info-form .info-list{
+	margin-bottom:20px;
+}
+.info-form .info-list .info-list-lt{
+	font-size:16px;
+	color:#666;
+	text-align:right;
+	width:100px;
+	margin-bottom:0;
+	font-weight:400;
+}
+.info-form .info-list .info-list-rt{
+	display:inline-block;
+	width:240px;
+	margin-left:10px;
+	position:relative;
+}
+.info-form .info-list .info-list-rt .info-list-input{
+	display:block;
+	width:100%;
+	font-size:14px;
+	line-height:16px;
+	padding:10px;
+	color:#333;
+	border:1px solid #CCC;
+	border-radius:3px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+}
+.info-form .info-list .info-list-rt .lifo-list-sign{
+	position:absolute;
+	display:inline-block;
+	font-size:14px;
+	line-height:16px;
+	padding:11px 0;
+	color:#c30223;
+	top:0;
+	right:-10px;
+}
+.info-form .info-sub-btn{
+	width:80px;
+	font-size:16px;
+	height:38px;
+	line-height:38px;
+	color:white;
+	background:#C10000;
+	border:none;
+	border-radius:3px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	outline:none;
+	user-select:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	margin-left:110px;
+}
+.info-form{
+	max-width: 400px;
+}
+/*适配移动端*/
+@media (max-width:415px){
+	.info-form .info-list .info-list-lt{
+		text-align:left;
+	}
+	.info-form .info-list .info-list-rt{
+		display:block;
+		margin-left:0;
+		width:95%;
+	}
+	.info-form .info-list .info-list-rt .lifo-list-sign{
+		right:-5%;
+	}
+	.info-form .info-sub-btn{
+		float:right;
+		margin-right:5%;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,130 @@
+.list-group-item a {
+    display: block;
+    padding: 5px 0 5px 25px;
+    text-decoration: none;
+}
+
+.modelList .glyphicon {
+    width: 20px;
+}
+
+.list-group-items {
+    display: none;
+    visibility: hidden;
+}
+
+.open {
+    background: #f5f5f5;
+}
+
+.open .list-group-items {
+    display: block;
+    visibility: visible;
+}
+
+.list-group-items a {
+    color: #000;
+    transition: all 0.4s;
+    margin-left: 20px;
+    padding-left: 10px;
+}
+
+.list-group-items a.active {
+    /*background: #ddd;*/
+    border-radius: 0;
+    color: #333;
+}
+.list-group-item.open .cateName.active{
+    color: #333;
+    background: #e8e8e8;
+}
+.search {
+    border: 0;
+    width: 80%;
+    background-color: #fbfbfb;
+}
+
+.searchbox {
+    height: 40px;
+}
+
+.serchLeft {
+    margin-left: 12px;
+    padding-left: 17px;
+    height: 100%;
+    line-height: 38px;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fbfbfb;
+}
+
+.addNew {
+    margin-right: 17px;
+    margin-top: 10px;
+}
+
+.glyphicon {
+    cursor: pointer;
+}
+
+input:focus, textarea:focus, keygen:focus, select:focus {
+    outline-offset: 0;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+hr {
+    margin-bottom: 0;
+    border-top: 1px solid #e5e5e5;
+}
+
+.list-group-item {
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: inherit;
+}
+
+.cateName {
+    cursor: pointer;
+    height: 55px;
+    line-height: 55px;
+    padding-left:50px;
+    color: #888;
+}
+.list-group{
+    margin-bottom:0;
+}
+.list-group-item {
+    padding: 0;
+}
+.list-group-item a:first-child {
+    border-top: 1px solid #e5e5e5;
+}
+.list-group-items a {
+    color: #888;
+    transition: all 0.4s;
+     margin-left: 0px;
+    padding-left: 77px;
+    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    height: 55px;
+    line-height: 44px;
+    box-sizing: border-box;
+}
+.list-group-item a:last-child {
+     border-bottom: 0;
+ }
+.cateName i{
+    margin-top: 20px;
+    margin-right: 17px;
+}
+.Catgoryedit{
+    margin-right:17px;
+}
+h3{
+    margin-top: 50px;
+    margin-bottom: 37px;
+    font-size: 22px;
+}

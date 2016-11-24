@@ -1,0 +1,13 @@
+.modal.in .modal-dialog {
+  z-index: 1041;
+  width: 350px;
+  height:200px;
+  margin: 100px auto;
+}
+.modal-header {
+   padding: 0;
+   border-bottom:0;
+  height: 45px;
+  padding-left: 15px;
+  background-color: #666666;
+}
