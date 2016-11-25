@@ -3,6 +3,7 @@
  */
 require('./style.css');
 var notice = require('../notice');
+var modelvm = require('../model');
 
 var vm = avalon.define({
     $id: 'info',
@@ -15,10 +16,17 @@ var vm = avalon.define({
             url: '/api/model/'+vm.id,
             success: function (data, textStatus, XHR) {
                 var _data = data.data;
-                delete _data.createTime
-                delete _data.creator
-                delete _data.modifyTime
+                if(_data.createTime){
+                    delete _data.createTime
+                }
+                if(_data.creator){
+                    delete _data.creator
+                }
+                if(_data.modifyTime){
+                    delete _data.modifyTime
+                }
                 vm.data = _data;
+
             }
         });
     },
@@ -54,6 +62,9 @@ var vm = avalon.define({
                             content: '修改成功!'
                         })
                         //vm.data = data;
+                        modelvm.request();
+                        vm.show = false;
+
                     }
                 });
             }

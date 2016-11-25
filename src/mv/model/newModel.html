@@ -10,7 +10,7 @@
     <label class="col-sm-3 control-label">名称：</label>
 
     <div class="col-sm-4">
-      <input type="text" class="form-control" ms-duplex="@data.name" ms-rules="{required:true,pattern:/^[\u4e00-\u9fa5(0-9)]{1,20}$/}" data-pattern-message="输入20字之内的英文或中文" />
+      <input type="text" class="form-control" ms-duplex="@data.name" ms-rules="{required:true,pattern:/^[\u4e00-\u9fa5(0-9)a-z]{1,20}$/}" data-pattern-message="输入20字之内的英文或中文" />
     </div>
     <div class="col-sm-5">
     	<div class="hint-box">
@@ -34,7 +34,7 @@
     <label class="col-sm-3 control-label">校验服务：</label>
 
     <div class="col-sm-4">
-      <input type="text" class="form-control" ms-duplex="@data.code" ms-rules="{required:true,maxlength:50}" />
+      <input type="text" class="form-control" ms-duplex="@data.checkService" ms-rules="{required:true,maxlength:50}" />
     </div>
     <div class="col-sm-5">
     	<div class="hint-box">
