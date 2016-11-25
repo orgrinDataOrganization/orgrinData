@@ -1,1 +1,39 @@
-<div>映射管理</div>
+<div class="" style="margin-top: 20px;" :controller="map">
+    <p>
+        <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus-sign"></i> 新建</button>
+        &nbsp;
+        <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-trash"></i> 删除</button>
+    </p>
+    <table class="table table-hover table-bor">
+    	<thead>
+        	<tr>
+            	<th></th>
+            	<th><input type="checkbox" /></th>
+            	<th>模型名</th>
+            	<th>所属系统</th>
+            </tr>
+        </thead>
+        <tbody>
+        	<tr>
+        		<td>1</td>
+        		<td><input type="checkbox" /></td>
+        		<td>模型名称</td>
+        		<td>所属系统ID</td>
+        	</tr>
+        </tbody>
+    </table>
+    <table class="table table-hover table-bor" style="margin-top:50px;">
+    	<thead>
+    		<tr>
+    			<th>字段名</th>
+    			<th>字段名</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr>
+    			<th>字段名称</th>
+    			<th><select name="" id="" class="form-control"><option value="字段名称">字段名称</option></select></th>
+    		</tr>
+    	</tbody>
+    </table>
+</div>
