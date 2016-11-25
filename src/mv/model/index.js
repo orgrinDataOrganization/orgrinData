@@ -5,7 +5,8 @@
 require('./style.css');
 var notice = require('../notice');
 var alert = require('../alert');
-
+var infoVm = require('../info');
+console.log('---',infoVm)
 var vm = avalon.define({
   $id: 'modelList',
   id: 0, //当前选中的模型
@@ -61,9 +62,9 @@ var vm = avalon.define({
     });
     vm.id = _item.id;
     location.hash = "#!/" + path + '/' + vm.id;
+      infoVm.request();
   },
   setCategoryByItemId: function (id) {
-    console.log(id)
     var _activeCategory = null;
     avalon.each(vm.data, function (j, el) {
       avalon.each(el, function (i, elem) {
@@ -121,7 +122,6 @@ var vm = avalon.define({
               type: 'success',
               content: '删除成功!'
             })
-
           }
 
         },
@@ -138,7 +138,6 @@ var vm = avalon.define({
   },
   onAdd: function (data) {
     var _activeCategory = null;
-      console.log(vm.data)
       console.log(data)
     avalon.each(vm.data, function (j, el) {
       if (el.clientsys == data.data) {
@@ -181,7 +180,6 @@ var vmNewModel = avalon.define({
   },
   submit: function () {
     this.hide();
-      console.log('hgjkj',this.data)
     avalon.ajax({
       url:  '/api/model/create',
       type: 'POST',
@@ -192,6 +190,9 @@ var vmNewModel = avalon.define({
           type: 'success',
           content: '增加成功!'
         })
+          vm.request();
+          vm.setDefaultItem();
+
       },
       error: function () {
         notice.open({
@@ -223,7 +224,6 @@ var vmNewModel = avalon.define({
     } else {
       this.data = getNewModelField(op.pid);
     }
-    console.log(_data)
     this.typeConfig = {
       currValue: [op.pid],
       data: _data
@@ -265,9 +265,11 @@ var vmNewModel = avalon.define({
 
 function getNewModelField(type) {
   return {
-    type: type ? type : 0,
+    clientsys: type ? type : 0,
     name: '',
     code: '',
-    remark: ''
+    comment: '',
+    creator:'',
+    checkService:''
   }
 }

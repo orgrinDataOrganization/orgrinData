@@ -12,9 +12,13 @@ var vm = avalon.define({
     show: false,
     request: function () {
         avalon.ajax({
-            url: '/api/model/'+this.id,
+            url: '/api/model/'+vm.id,
             success: function (data, textStatus, XHR) {
-                vm.data = data.data;
+                var _data = data.data;
+                delete _data.createTime
+                delete _data.creator
+                delete _data.modifyTime
+                vm.data = _data;
             }
         });
     },
@@ -41,14 +45,15 @@ var vm = avalon.define({
                 vm.point = '全部通过';
                 vm.show = true;
                 avalon.ajax({
-                    url: '/api/model/'+this.id+'/save',//调用修改的接口
+                    url: '/api/model/'+vm.id+'/save',//调用修改的接口
+                    type:'POST',
                     data: vm.data,
                     success: function (data, textStatus, XHR) {
                         notice.open({
                             type: 'success',
                             content: '修改成功!'
                         })
-                        vm.data = data;
+                        //vm.data = data;
                     }
                 });
             }

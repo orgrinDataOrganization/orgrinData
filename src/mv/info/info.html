@@ -35,6 +35,18 @@
       </div>
     </div>
     <div class="info-list">
+      <label class="info-list-lt">校验服务</label>
+      <div class="info-list-rt">
+        <input type="text" class="info-list-input" ms-duplex="@data.checkService"  ms-rules="{norequired:true,maxlength:15}" />
+      </div>
+    </div>
+    <div class="info-list">
+      <label class="info-list-lt">修改者</label>
+      <div class="info-list-rt">
+        <input type="text" class="info-list-input" ms-duplex="@data.modifier"  ms-rules="{norequired:true,maxlength:15}" />
+      </div>
+    </div>
+    <div class="info-list">
       <label class="info-list-lt">所属ID</label>
       <div class="info-list-rt">
         <input type="text" class="info-list-input" ms-duplex="@data.id" disabled/>
