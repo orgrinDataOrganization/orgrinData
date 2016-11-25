@@ -1,5 +1,5 @@
 <div :class="['btn-group','btn-group-block',(@open && 'open')]" :click="@stopPropagation">
-  <button type="button" class="btn btn-danger dropdown-toggle btn-block" data-toggle="dropdown"
+  <button type="button" class="btn dropdown-toggle btn-block" data-toggle="dropdown"
           ms-attr="{disabled: @disabled}" :click="@toggle">
     <span class="btn-group-text">{{@getCurrText()}}</span><span class="caret"></span>
 

@@ -8,6 +8,18 @@
    padding: 0;
    border-bottom:0;
   height: 45px;
+  line-height:45px;
   padding-left: 15px;
+  padding-right:15px;
   background-color: #666666;
+}
+.modal-header .modal-title{
+	line-height:inherit;
+	color:white;
+}
+.modal-header .close{
+	line-height:inherit;
+	color:white;
+	opacity:1;
+	font-size:32px;
 }

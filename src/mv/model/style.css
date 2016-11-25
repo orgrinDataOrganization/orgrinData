@@ -128,3 +128,37 @@ h3{
     margin-bottom: 37px;
     font-size: 22px;
 }
+.form-control{
+	height:38px;
+}
+.hint-box{
+	height:38px;
+}
+.hint-box .hint-icon{
+	color:#c30223;
+	display:inline-block;
+	line-height:42px;
+	padding:0 2px;
+	width:5%;
+	text-align:center;
+}
+.hint-box .hint-text{
+	display:inline-block;
+	vertical-align:middle;
+	width:95%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

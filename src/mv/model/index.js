@@ -97,8 +97,8 @@ var vm = avalon.define({
   },
   onDelete: function () {
     alert.open({
-      title: '',
-      content: '是否删除选中模型?'
+      title: ' ',
+      content: '<span class="remove-icon">？</span>确认删除?'
     }).done(function () {
 
       avalon.ajax({
