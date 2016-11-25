@@ -1,0 +1,6 @@
+@charset "utf-8";
+/* CSS Document */
+.table-bor td,.table-bor th{
+	border:1px solid #CCC !important;
+	text-align:center;
+}
