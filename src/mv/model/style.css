@@ -71,7 +71,7 @@
 input:focus, textarea:focus, keygen:focus, select:focus {
     outline-offset: 0;
     outline: none;
-    -webkit-appearance: none;
+    /*-webkit-appearance: none;*/
 }
 
 hr {

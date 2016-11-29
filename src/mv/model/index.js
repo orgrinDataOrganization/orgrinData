@@ -89,7 +89,7 @@ var vm = avalon.define({
             pid: this.pid
         });
     },
-    onNewModelBySimilar: function () {
+    onNewModelBySimilar: function (e) {
         vmNewModel.open({
             options: this.data,
             pid: this.pid,
@@ -106,15 +106,6 @@ var vm = avalon.define({
                 url: '/api/model/' + vm.id + '/del',
                 type: 'GET',
                 success: function (data, textStatus, XHR) {
-                    //var _data = vm.data;
-                    //for (var j in _data) {
-                    //  for (var i in _data[j].data) {
-                    //    if (_data[j].data[i].id == vm.id) {
-                    //      _data[j].data.splice(i, 1);
-                    //      vm.data = _data;
-                    //      break;
-                    //    }
-                    //  }
 
                     if (data.data == 1) {
                         vm.request();
@@ -216,10 +207,10 @@ var vmNewModel = avalon.define({
         });
         if (op.id) {
             avalon.ajax({
-                url: apiPath + 'info/' + op.id,
+                url: '/api/model/'+op.id,
                 success: function (data, textStatus, XHR) {
-                    vmNewModel.data = data;
-                    vmNewModel.typeConfig.currValue = [data.clientsys];
+                    vmNewModel.data = data.data;
+                    vmNewModel.typeConfig.currValue = [data.data.clientsys];
                 }
             });
         } else {

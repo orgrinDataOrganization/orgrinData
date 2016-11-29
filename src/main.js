@@ -45,7 +45,7 @@ avalon.router.add("/data/:id", function setPath(id) {
   vmApp.setCurrPath(this.path);
   vmModelList.id = id;
   mvData.id = id;
-  mvData.request();
+ // mvData.request();
 });
 avalon.router.add("/map/:id", function setPath(id) {
   vmApp.setCurrPath(this.path);

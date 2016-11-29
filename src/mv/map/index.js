@@ -3,6 +3,6 @@
  */
 require('./style.css');
 var vm = avalon.define({
-	$id:map
+	$id:'map'
 })
 module.exports = vm;
