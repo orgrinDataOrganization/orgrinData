@@ -1,7 +1,7 @@
 /**
  * Created by linmingxiong on 16/9/27.
  */
-
+require('./addField.css');
 var vm = avalon.define({
     $id: 'field',
     data: [],

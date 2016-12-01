@@ -1,113 +1,258 @@
 <form class="form-horizontal" role="form" ms-validate="@validate">
-  <div class="row">
-      <div class="col-sm-6 clearfix">
-          <div class="form-group">
-              <label class="col-sm-3 control-label"></label>
-              <div class="col-sm-9">
-                  <span :css="{color:'red'}" :text="@point" :visible="@show"></span>
-
-              </div>
-          </div>
-          <h3>基本信息</h3>
-          
-          <div class="form-group">
-            <label class="col-sm-3 control-label">名称：</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" ms-duplex="@basicInfo.name"
-                     ms-rules="{ required: true,maxlength:15,pattern: /([\u4e00-\u9fa5]{1,15})|([a-z]{1,15})/ }"
-                     data-required-message="请输入名称"
-                     data-maxlength-message="输入长度不能大于15个字母"/>
+    <div class="row">
+    	<div class="col-sm-12">
+            <div class="form-group col-sm-6">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-9">
+                	<span :css="{color:'red'}" :text="@point" :visible="@show"></span>
+                </div>
             </div>
-          </div>
-          
-          <div class="form-group">
-            <label class="col-sm-3 control-label">代码：</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" ms-duplex="@basicInfo.code"
-                     ms-rules="{ required: true,maxlength:10}"
-                     data-required-message="请输入代码"
-                     data-maxlength-message="代码长度不能大于 10 个数字"/>
+            <div class="col-sm-12 form-title">
+            	<h3>基本信息</h3>
             </div>
-          </div>
-          
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-3 control-label">字段分组：</label>-->
-            <!--<div class="col-sm-9">-->
-              <!--<ms-dropdown ms-widget="@fieldGroup"></ms-dropdown>-->
-            <!--</div>-->
-          <!--</div>-->
-          
-          <div class="form-group">
-            <label class="col-sm-3 control-label">控件类型：</label>
-            <div class="col-sm-9">
-              <ms-dropdown ms-widget="@controlType"></ms-dropdown>
+            <div class="form-group-box col-sm-12">
+            	<div class="form-group col-sm-6">
+                	<label class="col-sm-4 control-label">名称</label>
+                    <div class="col-sm-7">
+                    	<input type="text" class="form-control" ms-duplex="@basicInfo.name" ms-rules="{ required: true,maxlength:15,pattern: /([\u4e00-\u9fa5]{1,15})|([a-z]{1,15})/ }" data-required-message="请输入名称" data-maxlength-message="输入长度不能大于15个字母"/>
+                    </div>
+                    <div class="col-sm-1 form-hint">*</div>
+                </div>
+                <div class="form-group col-sm-6">
+                	<label class="col-sm-4 control-label">代码</label>
+                    <div class="col-sm-7">
+                    	<input type="text" class="form-control" ms-duplex="@basicInfo.code" ms-rules="{ required: true,maxlength:10}" data-required-message="请输入代码" data-maxlength-message="代码长度不能大于 10 个数字"/>
+                    </div>
+                    <div class="col-sm-1 form-hint">*</div>
+                </div>
+                <div class="form-group col-sm-6">
+                	<label class="col-sm-4 control-label">控件类型</label>
+                	<div class="col-sm-7 form-select">
+                    	<ms-dropdown ms-widget="@controlType"></ms-dropdown>
+                    </div>
+                	<div class="col-sm-1 form-hint"></div>
+                </div>
+                <div class="form-group col-sm-6">
+                	<label class="col-sm-4 control-label">数据类型</label>
+                	<div class="col-sm-7 form-select">
+                    	<ms-dropdown ms-widget="@dataType"></ms-dropdown>
+                    </div>
+                	<div class="col-sm-1 form-hint"></div>
+                </div>
+                <div class="form-group col-sm-6">
+                	<label class="col-sm-4 control-label">是否必填</label>
+                    <div class="col-sm-7 form-radio">
+                        <input type="radio" value="1"  ms-duplex="@basicInfo.isRequired"/>是
+                        <input type="radio" value="0"  ms-duplex="@basicInfo.isRequired"/>否
+                    </div>
+                    <div class="col-sm-1 form-hint"></div>
+                </div>
+                <div class="form-group col-sm-6">
+                	<label class="col-sm-4 control-label">默认值</label>
+                    <div class="col-sm-7">
+              			<input type="text" class="form-control" ms-duplex="@basicInfo.default" ms-rules="{norequired:true,maxlength:10}" />
+            		</div>
+                    <div class="col-sm-1 form-hint"></div>
+          		</div>   
+            </div> 
+        </div>
+        <div class="col-sm-12">
+        	<h3>限制条件</h3>
+        	<div class="form-group-box col-sm-12">
+            	<div class="form-group col-sm-6">
+            		<label class="col-sm-4 control-label">选项列表</label>
+                	<div class="col-sm-7 form-group-re">
+              			<input type="text" class="form-control" ms-duplex="@interfaceAttr.list" readonly/>
+                        <i class="form-group-icon">...</i>
+            		</div>
+            		<!--<button type="button" class="btn btn-default" ms-click="@setList">设置...</button>-->
+          		</div> 
+                <div class="col-sm-12 form-group">
+                	<div class="col-sm-2"></div>
+                    <label class="col-sm-2 control-label label-lf">选项数据来源:</label>
+                    <div class="col-sm-8 form-radio">
+                    	<input type="radio" value="0" ms-duplex="@fieldList.getMethod" avalon-events="click:_6">从系统代码中选择
+          				<input type="radio" value="1" ms-duplex="@fieldList.getMethod" avalon-events="click:_6">手工输入
+          				<input type="radio" value="2" ms-duplex="@fieldList.getMethod" avalon-events="click:_6">从后台方法
+                    </div>
+                </div>
+                <div class="col-sm-12 form-group">
+                	<div class="col-sm-4"></div>
+                    <div class="col-sm-6">
+                    	<select name="" id="" class="form-control">
+                        	<option value="">数据类型</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+                <div class="col-sm-12 form-group">
+                	<div class="col-sm-4"></div>
+                    <div class="col-sm-8">
+        				<button type="submit" class="btn btn-danger btn-style">确定</button>
+                        <button type="button" class="btn btn-default btn-style">取消</button>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group col-sm-6">
+                        <label class="col-sm-4 control-label">数据长度</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" ms-duplex="@interfaceAttr.rule" ms-rules="{required:true,maxlength:50}" />
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group col-sm-6">
+                        <label class="col-sm-4 control-label">校验规则</label>
+                        <div class="col-sm-7 form-group-re">
+                            <input type="text" class="form-control" ms-duplex="@interfaceAttr.rule" readonly/>
+                            <i class="form-group-icon">...</i>
+                        </div>
+                        <!--<button type="button" class="btn btn-default" ms-click="@setRules">设置...</button>-->
+                    </div>
+                </div>
+                <div class="col-sm-12 form-group">
+                	<div class="col-sm-2"></div>
+                    <label class="col-sm-2 control-label label-lf">一般校验规则</label>
+                    <div class="col-sm-8">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                	<div class="col-sm-2"></div>
+                    <div class="col-sm-8 form-group-newbox">
+                    	<div class="col-sm-6 form-group">
+                        	<!--ms-duplex="@commonRulesA" data-duplex-changed="@getCommonRules" avalon-events="click:_6"-->
+                        	<input type="checkbox" value="0" >不能为空
+                        </div>
+                        <div class="col-sm-6 form-group">
+                        	<input type="checkbox" value="1">数字（整数或小数）
+                        </div>
+                        <div class="col-sm-6 form-group">
+                        	<input type="checkbox" value="2">整数
+                        </div>
+                        <div class="col-sm-6 form-group">
+                        	<input type="checkbox" value="3">时间（HH-mm-ss）
+                        </div>
+                        <div class="col-sm-6 form-group">
+                        	<input type="checkbox" value="4">日期（yyyy-MM-dd）
+                        </div>
+                        <div class="col-sm-6 form-group">
+                        	<input type="checkbox" value="5">日期时间（yyyy-MM-dd HH-mm-ss）
+                        </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+                <div class="col-sm-12 form-group">
+                	<div class="col-sm-2"></div>
+                    <label class="col-sm-2 control-label label-lf">业务校验规则</label>
+                    <div class="col-sm-8">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                	<div class="col-sm-2"></div>
+                    <div class="col-sm-8 form-group-newbox">
+                    	<div class="col-sm-6 form-group">
+                        	<!--ms-duplex="@commonRulesB" avalon-events="click:_6"-->
+                        	<input type="checkbox" value="0">Email
+                        </div>
+                        <div class="col-sm-6 form-group">
+                        	<input type="checkbox" value="1">邮政编码（中国）
+                        </div>
+                        <div class="col-sm-6 form-group">
+                        	<input type="checkbox" value="2">固定电话号码（中国）
+                        </div>
+                        <div class="col-sm-6 form-group">
+                        	<input type="checkbox" value="3">移动电话号码（中国）
+                        </div>
+                        <div class="col-sm-6 form-group">
+                        	<input type="checkbox" value="4">固定或移动电话（中国）
+                        </div>
+                        <div class="col-sm-6 form-group">
+                        	<input type="checkbox" value="5">身份证号码（中国）
+                        </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+                <div class="col-sm-12 form-group">
+                	<div class="col-sm-2"></div>
+                    <label class="col-sm-2 control-label label-lf">高级校验规则</label>
+                    <div class="col-sm-8">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                	<div class="col-sm-2"></div>
+                    <div class="col-sm-8 form-group-newbox">
+                    	<div class="col-sm-12 form-group">
+                        	<div class="col-sm-3 control-label label-lf">
+                            	<input type="checkbox">JavaScript脚本
+                            </div>
+                        	<div class="col-sm-8">
+                            	<input type="text" class="form-control">
+                            </div>
+                        	<div class="col-sm-1 form-hint">*</div>
+                        </div>
+                    	<div class="col-sm-12 form-group">
+                        	<div class="col-sm-3 control-label label-lf">
+                            	<input type="checkbox">正则表达式
+                            </div>
+                        	<div class="col-sm-8">
+                            	<input type="text" class="form-control">
+                            </div>
+                        	<div class="col-sm-1 form-hint">*</div>
+                        </div>
+                    	<div class="col-sm-12 form-group">
+                        	<div class="col-sm-3 control-label label-lf">
+                            	<input type="checkbox">长度
+                            </div>
+                            <div class="col-sm-3">
+                            	<input type="text" class="form-control">
+                            </div>
+                        	<div class="col-sm-5">
+                            	<input type="number" class="form-control">
+                            </div>
+                        	<div class="col-sm-1 form-hint"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+                <div class="col-sm-12 form-group">
+                	<div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                    	<button type="submit" class="btn btn-danger btn-style">确定</button>
+                        <button type="button" class="btn btn-default btn-style">取消</button>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group col-sm-6">
+                        <label class="col-sm-4 control-label">说明文本</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" ms-duplex="@interfaceAttr.text"/>
+                        </div>
+                        <!--<button type="button" class="btn btn-default" ms-click="@setRules">设置...</button>-->
+                    </div>
+                </div>
             </div>
-          </div> 
-          
-          <div class="form-group">
-            <label class="col-sm-3 control-label">数据类型：</label>
-            <div class="col-sm-9">
-              <ms-dropdown ms-widget="@dataType"></ms-dropdown>
-            </div>
-          </div> 
-          
-          <div class="form-group">
-            <label class="col-sm-3 control-label">是否必填：</label>
-            <div class="col-sm-9">
-              <input type="radio" value="1"  ms-duplex="@basicInfo.isRequired"/>是
-              <input type="radio" value="0"  ms-duplex="@basicInfo.isRequired"/>否
-            </div>
-          </div> 
-          
-          <div class="form-group">
-            <label class="col-sm-3 control-label">默认值：</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" ms-duplex="@basicInfo.default" ms-rules="{norequired:true,maxlength:10}" />
-            </div>
-          </div> 
-          
-      </div>
-      <div class="col-sm-6 ">                   
-          <h3>界面属性</h3>          
-          <div class="form-group">
-            <label class="col-sm-3 control-label">选项列表：</label>
-            <div class="col-sm-6">
-              <input type="text" class="form-control" ms-duplex="@interfaceAttr.list" readonly/>
-            </div>
-            <button type="button" class="btn btn-default" ms-click="@setList">设置...</button>
-          </div> 
-          
-          <div class="form-group">
-            <label class="col-sm-3 control-label">校验规则：</label>
-            <div class="col-sm-6">
-              <input type="text" class="form-control" ms-duplex="@interfaceAttr.rule" readonly/>
-            </div>
-            <button type="button" class="btn btn-default" ms-click="@setRules">设置...</button>
-          </div>
-          <div class="form-group">
-              <label class="col-sm-3 control-label">数据长度：</label>
-              <div class="col-sm-6">
-                  <input type="text" class="form-control" ms-duplex="@interfaceAttr.rule" ms-rules="{required:true,maxlength:50}" />
-              </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-3 control-label">检验条件：</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" ms-duplex="@interfaceAttr.conditions"/>
-            </div>
-          </div> 
-          
-          <div class="form-group">
-            <label class="col-sm-3 control-label">说明文本：</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" ms-duplex="@interfaceAttr.text"/>
-            </div>
-          </div>           
-      </div>      
-  </div>  
-  <div class="modal-footer" >
-        <button type="button" class="btn btn-default" data-dismiss="modal" :click="@cancelHandle">取消</button>
-        <button type="submit" class="btn btn-danger">确定</button>
+        </div>
+    </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="modal-footer" style="text-align:center;">
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal" :click="@cancelHandle">取消</button>-->
+        <button type="submit" class="btn btn-danger" style="width:80px;margin-left:0;">确定</button>
     </div>
 </form>
 <ms-dialog :widget="@config" :controller="setListDialog"></ms-dialog>
