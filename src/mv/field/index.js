@@ -2,20 +2,27 @@
  * Created by linmingxiong on 16/9/27.
  */
 require('./addField.css');
-var vm = avalon.define({
+var vm;
+var notice = require('../notice');
+var alert = require('../alert');
+
+vm = avalon.define({
     $id: 'field',
     data: [],
     pageConfig: {showPages: 5},
     request: function () {
         avalon.ajax({
-            url: apiPath + 'field/' + this.id,
-            success: function (data, textStatus, XHR) {
-                vm.data = data;
+            url: '/model/' + this.id + '/field/list',
+            type: 'GET',
+            success: (data, textStatus, XHR) => {
+                data.data.forEach((el) => {
+                    el.checked = false
+                })
+                vm.data = data.data
             }
         });
     },
-
-    chkAll: false,
+    allchecked: false,
     checkAll: function (e) {
         var checked = e.target.checked
         vm.data.forEach(function (el) {
@@ -24,10 +31,11 @@ var vm = avalon.define({
     },
     checkOne: function (e) {
         var checked = e.target.checked
+        log(checked)
         if (checked === false) {
-            vm.chkAll = false
+            vm.allchecked = false
         } else {//avalon已经为数组添加了ecma262v5的一些新方法
-            vm.chkAll = vm.data.every(function (el) {
+            vm.allchecked = vm.data.every(function (el) {
                 return el.checked
             })
         }
@@ -35,31 +43,53 @@ var vm = avalon.define({
     getChecks: function () {
         var tmpArray = [];
         avalon.each(vm.data, function (index, el) {
-            if (el.checked === true) {
-                tmpArray.push(index);
+            if (el.checked == true) {
+                tmpArray.push(el._id);
             }
         })
         return tmpArray;
     },
     delData: function () {
         var delArray = vm.getChecks();
-
+        console.log(delArray)
         if (delArray.length === 0) {
             //若未选中，弹出请选择要删除的数据的对话框
             console.log("请选择要删除的数据");
 
         }
         else {
-            console.log('删除的数据下标为：' + delArray.join(";"));
+            console.log('删除的数据为：' + delArray.join(";"));
             //弹出确定要删除吗？对话框，点击确定则执行vm.delRequest函数，向服务器请求删除操作；取消则关闭对话框。
+            alert.open({
+                title: ' ',
+                content: '<span class="remove-icon">？</span>确认删除?'
+            }).done(function () {
+                vm.delRequest(delArray);
+            }).fail(function () {
+                log('error')
+            })
             //vm.delRequest(delArray.join(";"));
         }
     },
     delRequest: function (del) {
         avalon.ajax({
-            url: apiPath + 'data' + "/?del=" + del,
+            url: '/model/' + vm.id + '/field/' + del[0] + '/del',
             success: function (data, textStatus, XHR) {
-                vm.data = data;
+                //vm.data = data;
+                if (data.data == 1) {
+                    console.log(data)
+                    vm.request();
+                    notice.open({
+                        type: 'success',
+                        content: '删除成功!'
+                    })
+                }
+            },
+            error:function(){
+                notice.open({
+                    type: 'danger',
+                    content: '删除错误!'
+                })
             }
         });
     },
@@ -73,12 +103,12 @@ var vm = avalon.define({
         else {
             console.log('编辑的数据下标为：' + editArray);
             //弹出确定要删除吗？对话框，点击确定则执行vm.delRequest函数，向服务器请求删除操作；取消则关闭对话框。
-            //vm.delRequest(delArray.join(";"));
+            //vm.editRequest(delArray.join(";"));
         }
     },
-    editRequest: function (id) {
+    editRequest: function (el) {
         avalon.ajax({
-            url: apiPath + 'data' + "/?edit=" + id,
+            url: '/model/' + vm.id + '/field/' + el[0].id + '/save',
             success: function (data, textStatus, XHR) {
                 vm.data = data;
             }
@@ -87,7 +117,15 @@ var vm = avalon.define({
     addData: function () {
         vmAddFieldDialog.open();
     }
+
 });
+
+vm.$watch("data", function (a, b, name) {
+    //vm.data=a;
+    //a.forEach(function (el) {
+    //    el.checked = a;
+    //})
+})
 
 /*一级弹层，添加字段 vm*/
 var vmAddFieldDialog = avalon.define({
@@ -182,7 +220,7 @@ var vmAddFieldDialog = avalon.define({
                 vmAddFieldDialog.point = '全部通过';
                 vmAddFieldDialog.show = true;
                 avalon.ajax({
-                    url: apiPath + 'info/' + this.id,//调用修改的接口
+                    url: '/model/' + vm.id + '/field/create',//调用修改的接口
                     data: vmAddFieldDialog.data,
                     success: function (data, textStatus, XHR) {
                         vmAddFieldDialog.data = data;

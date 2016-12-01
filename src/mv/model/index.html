@@ -18,7 +18,7 @@
                 <a :for="elem in el.list" href="javascript:;" :class="[(elem.id==@id && 'active')]"
                    :click="@clickHandle(elem)">{{elem.name}}
                     <span class="Catgoryedit pull-right" :visible="elem.id==@id">
-                        <i class="glyphicon glyphicon-th-list" :click="@onNewModelBySimilar"></i>
+                        <i class="glyphicon glyphicon-th-list" :click="@onNewModelBySimilar(elem)"></i>
                         <i class="glyphicon glyphicon-trash" style="margin-left: 10px;" :click="@onDelete"></i>
                     </span>
                 </a>

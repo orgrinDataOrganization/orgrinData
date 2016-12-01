@@ -17,8 +17,11 @@ html{
 html,body{
   height:100%;
 }
+.container-fluid{
+  padding:0;
+}
 .container-fluid.top {
-  margin-top: 15px;
+  /*margin-top: 15px;*/
   margin-bottom: 15px;
 }
 /*.container-fluid{*/
@@ -82,6 +85,7 @@ html,body{
 .navHead>li>a:link,.navHead>li>a:hover,.navHead>li>a:visited{
   text-decoration: none;
 }
+
 /*屏幕兼容性适配*/
 @media screen and (max-width:900px )   {
   .left,.right{
