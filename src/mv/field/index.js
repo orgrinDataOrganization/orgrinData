@@ -1,7 +1,7 @@
 /**
  * Created by linmingxiong on 16/9/27.
  */
-
+require('./addField.css');
 var vm;
 var notice = require('../notice');
 var alert = require('../alert');
