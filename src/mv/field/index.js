@@ -31,7 +31,6 @@ vm = avalon.define({
     },
     checkOne: function (e) {
         var checked = e.target.checked
-        log(checked)
         if (checked === false) {
             vm.allchecked = false
         } else {//avalon已经为数组添加了ecma262v5的一些新方法
@@ -76,14 +75,20 @@ vm = avalon.define({
             url: '/model/' + vm.id + '/field/' + del[0] + '/del',
             success: function (data, textStatus, XHR) {
                 //vm.data = data;
-                if (data.data == 1) {
-                    console.log(data)
-                    vm.request();
-                    notice.open({
-                        type: 'success',
-                        content: '删除成功!'
-                    })
-                }
+                //if (data.data == 1) {
+                //    console.log(data)
+                //    vm.request();
+                //    notice.open({
+                //        type: 'success',
+                //        content: '删除成功!'
+                //    })
+                //}
+                console.log('success')
+                vm.request();
+                notice.open({
+                    type: 'success',
+                    content: '删除成功!'
+                })
             },
             error:function(){
                 notice.open({
@@ -101,7 +106,7 @@ vm = avalon.define({
 
         }
         else {
-            console.log('编辑的数据下标为：' + editArray);
+            console.log('编辑的数据为：' + editArray);
             //弹出确定要删除吗？对话框，点击确定则执行vm.delRequest函数，向服务器请求删除操作；取消则关闭对话框。
             //vm.editRequest(delArray.join(";"));
         }
