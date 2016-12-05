@@ -55,7 +55,7 @@ var vm = avalon.define({
         path = path || 'info';
 
         var _item = null;
-        console.log(vm.data)
+        //console.log(vm.data)
         avalon.each(vm.data, function (j, el) {
             if (el.list.length) {
                 _item = el.list[0];
