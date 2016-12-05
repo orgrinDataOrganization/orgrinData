@@ -28,6 +28,18 @@
 .modal-body-co{
 	background:#f6f6f6;
 }
+.delect-box{
+	
+}
+.delect-box .modal-dialog{
+	width:400px !important;
+	height:120px !important;
+	margin-top:-60px !important;
+	margin-left:-200px !important;
+}
+.delect-box .modal-body{
+	height:70px;
+}
 .remove-icon{
 	display:inline-block;
 	background:#b10000;

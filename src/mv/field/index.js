@@ -152,7 +152,7 @@ var vmAddFieldDialog = avalon.define({
         title: '添加字段',
         show: false,
         showFooter: false,
-        mWidth: "1000",
+        mWidth: "760",
         content: require('./addField.html'),
         ok: function () {
             vmAddFieldDialog.submit();
