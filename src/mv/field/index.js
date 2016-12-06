@@ -74,21 +74,13 @@ vm = avalon.define({
         avalon.ajax({
             url: '/model/' + vm.id + '/field/' + del[0] + '/del',
             success: function (data, textStatus, XHR) {
-                //vm.data = data;
-                //if (data.data == 1) {
-                //    console.log(data)
-                //    vm.request();
-                //    notice.open({
-                //        type: 'success',
-                //        content: '删除成功!'
-                //    })
-                //}
-                console.log('success')
-                vm.request();
-                notice.open({
-                    type: 'success',
-                    content: '删除成功!'
-                })
+                if (data.data == 1) {
+                    vm.request();
+                    notice.open({
+                        type: 'success',
+                        content: '删除成功!'
+                    })
+                }
             },
             error:function(){
                 notice.open({
@@ -125,63 +117,50 @@ vm = avalon.define({
 
 });
 
-vm.$watch("data", function (a, b, name) {
-    //vm.data=a;
-    //a.forEach(function (el) {
-    //    el.checked = a;
-    //})
-})
-
 /*一级弹层，添加字段 vm*/
 var vmAddFieldDialog = avalon.define({
     $id: 'addFieldDialog',
     point: '',
     show: false,
     basicInfo: {
-        name: '姓名',
-        code: 'username',
+        name: '',
+        code: '',
         fGroup: 'remark',
-        cType: '输入框',
-        dType: '字符型',
-        isRequired: '0',
-        default: '默认值'
+        widgetType: 'text',
+        dataType: '字符型',
+        notNull: '0',
+        default: ''
     },
     interfaceAttr: {
-        list: 'a,b,c,d',
-        rule: 'a,b,c,d',
-        conditions: '条件条件条件...',
-        text: '文本文本...'
+        list: '',
+        rule: '',
+        conditions: '',
+        text: ''
     },
     config: {
         id: 'addfield',
         title: '添加字段',
         show: false,
         showFooter: false,
-        mWidth: "1000",
+        mWidth: "760",
         content: require('./addField.html'),
         ok: function () {
             vmAddFieldDialog.submit();
         }
     },
-    fieldGroup: {
-        data: [{label: '111', value: 1}, {label: '222', value: 2}, {label: '333', value: 3}],
-        currValue: 2,
-        onSelect: function (v) {
-            vmAddFieldDialog.basicInfo.fGroup = v;
-        }
-    },
+
     controlType: {
-        data: [{label: 'aaa', value: 1}, {label: 'bbb', value: 2}, {label: 'ccc', value: 3}],
-        currValue: 2,
+        data: [{label: '文本框', value: 'text'}, {label: '多行文本框', value: 'multitext'}, {label: '单选框', value: 'radio'}, {label: '多选框', value: 'checkbox'}, {label: '日期选择框', value: 'date'}, {label: '日期时间选择框', value: 'datetime'}, {label: '下拉框', value: 'list'}, {label: '富文本框', value: 'richbox'}],
+        currValue: 'text',
         onSelect: function (v) {
-            vmAddFieldDialog.basicInfo.cType = v;
+            vmAddFieldDialog.basicInfo.widgetType = v;
         }
     },
     dataType: {
-        data: [{label: 'AAA', value: 1}, {label: 'BBB', value: 2}, {label: 'CCC', value: 3}],
-        currValue: 2,
+        data: [{label: '字符串', value: 'string'}, {label: '短整数', value: 'int'}, {label: '整数', value: 'long'}, {label: '数字', value: 'double'}, {label: '日期', value: 'date'}, {label: '日期时间', value: 'datetime'}, {label: '时间', value: 'time'}],
+        currValue: 'string',
         onSelect: function (v) {
-            vmAddFieldDialog.basicInfo.dType = v;
+            vmAddFieldDialog.basicInfo.dataType = v;
         }
     },
     cancelHandle: function () {
@@ -199,8 +178,22 @@ var vmAddFieldDialog = avalon.define({
     setList: function () {
         vmsetListDialog.open();
     },
+    fieldList: {
+        getMethod: "0",
+        sysList0: "",
+        sysList1: "",
+        sysList2: "",
+    },
     setRules: function () {
         vmsetRulesDialog.open();
+    },
+    listShow:false,
+    listShowHandle:function(){
+        this.listShow=!this.listShow;
+    },
+    ruleShow:false,
+    ruleShowHandle:function(){
+        this.ruleShow=!this.ruleShow;
     },
     validate: {
         onError: function (reasons) {
