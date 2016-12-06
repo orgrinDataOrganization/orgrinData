@@ -2,11 +2,9 @@
 /* CSS Document */
 .modal-body{
 	background:#f6f6f6;
-}
-.form-horizontal{
-	height: 400px;
-    overflow-y: auto;
-	overflow-x: hidden;
+	height:400px;
+	overflow-x:hidden;
+	overflow-y:auto;
 }
 .form-group-box{
 	border:1px solid #CCC;
@@ -48,6 +46,7 @@ h3{
 .form-hint{
 	color:#c30223;
 	margin-top:10px;
+	margin-left:-15px;
 }
 .btn-style{
 	width:80px;
