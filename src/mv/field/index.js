@@ -129,13 +129,13 @@ var vmAddFieldDialog = avalon.define({
         widgetType: 'text',
         dataType: '字符型',
         notNull: '0',
-        default: ''
+        defaultValue: ''
     },
     interfaceAttr: {
-        list: '',
-        rule: '',
-        conditions: '',
-        text: ''
+        options: '',
+        checkRule: '',
+        length: '',
+        comment: ''
     },
     config: {
         id: 'addfield',
@@ -149,7 +149,7 @@ var vmAddFieldDialog = avalon.define({
         }
     },
 
-    controlType: {
+    widgetType: {
         data: [{label: '文本框', value: 'text'}, {label: '多行文本框', value: 'multitext'}, {label: '单选框', value: 'radio'}, {label: '多选框', value: 'checkbox'}, {label: '日期选择框', value: 'date'}, {label: '日期时间选择框', value: 'datetime'}, {label: '下拉框', value: 'list'}, {label: '富文本框', value: 'richbox'}],
         currValue: 'text',
         onSelect: function (v) {
@@ -179,10 +179,14 @@ var vmAddFieldDialog = avalon.define({
         vmsetListDialog.open();
     },
     fieldList: {
-        getMethod: "0",
-        sysList0: "",
-        sysList1: "",
-        sysList2: "",
+        getMethod: "input",
+        sysListinput: ""
+    },
+    listOkHandle:function(){
+        this.interfaceAttr.options=this.fieldList.getMethod+':'+this.fieldList.sysListinput
+    },
+    listCancelHandle:function(){
+        this.interfaceAttr.options=''
     },
     setRules: function () {
         vmsetRulesDialog.open();
@@ -194,6 +198,9 @@ var vmAddFieldDialog = avalon.define({
     ruleShow:false,
     ruleShowHandle:function(){
         this.ruleShow=!this.ruleShow;
+    },
+    rowlist:{
+
     },
     validate: {
         onError: function (reasons) {

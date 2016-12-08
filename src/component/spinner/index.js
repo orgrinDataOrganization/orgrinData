@@ -5,8 +5,8 @@ require('./style.css');
 avalon.component('ms-spinner', {
     template: require('./temp.html'),
     defaults: {
-        val: 10,
-        variable: 5,
+        val: 50,
+        variable: 1,
         obj: {
             placeholder: "请输入数字",
             min: 10 ,//设置为非数字数据格式unlimit表示无最小限制，如果有限制请修改为限制的最小值
