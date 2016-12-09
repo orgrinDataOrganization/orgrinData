@@ -1,5 +1,5 @@
 /**
- * Created by linmingxiong on 16/9/27.
+ * Created by ff on 16/9/27.
  */
 require('./addField.css');
 var vm;
@@ -82,7 +82,7 @@ vm = avalon.define({
                     })
                 }
             },
-            error:function(){
+            error: function () {
                 notice.open({
                     type: 'danger',
                     content: '删除错误!'
@@ -99,15 +99,18 @@ vm = avalon.define({
         }
         else {
             console.log('编辑的数据为：' + editArray);
-            //弹出确定要删除吗？对话框，点击确定则执行vm.delRequest函数，向服务器请求删除操作；取消则关闭对话框。
-            //vm.editRequest(delArray.join(";"));
+            vm.FindRequest(editArray[0]);
+            vmAddFieldDialog.open();
+            vmAddFieldDialog.isEdit=true;
         }
     },
-    editRequest: function (el) {
+    FindRequest: function (el) {
         avalon.ajax({
-            url: '/model/' + vm.id + '/field/' + el[0].id + '/save',
+            url: '/model/' + vm.id + '/field/' + el,
+            type:'GET',
             success: function (data, textStatus, XHR) {
-                vm.data = data;
+                vmAddFieldDialog.data = data.data;
+                vmAddFieldDialog._id=data.data._id;
             }
         });
     },
@@ -122,20 +125,37 @@ var vmAddFieldDialog = avalon.define({
     $id: 'addFieldDialog',
     point: '',
     show: false,
-    basicInfo: {
+    isEdit:false,
+    //data:{},
+    //basicInfo: {
+    //    name: '',
+    //    code: '',
+    //    fGroup: 'remark',
+    //    widgetType: 'text',
+    //    dataType: '字符型',
+    //    notNull: '0',
+    //    defaultValue: ''
+    //},
+    //interfaceAttr: {
+    //    options: '',
+    //    checkRule: '',
+    //    length: '',
+    //    comment: ''
+    //},
+    _id:'',
+    data: {
         name: '',
         code: '',
-        fGroup: 'remark',
         widgetType: 'text',
-        dataType: '字符型',
-        notNull: '0',
-        defaultValue: ''
-    },
-    interfaceAttr: {
+        dataType: 'string',
+        notNull: 'n',
+        defaultValue: '',
         options: '',
         checkRule: '',
         length: '',
-        comment: ''
+        comment: '',
+        base: '',
+        creator: 'ff'
     },
     config: {
         id: 'addfield',
@@ -150,17 +170,29 @@ var vmAddFieldDialog = avalon.define({
     },
 
     widgetType: {
-        data: [{label: '文本框', value: 'text'}, {label: '多行文本框', value: 'multitext'}, {label: '单选框', value: 'radio'}, {label: '多选框', value: 'checkbox'}, {label: '日期选择框', value: 'date'}, {label: '日期时间选择框', value: 'datetime'}, {label: '下拉框', value: 'list'}, {label: '富文本框', value: 'richbox'}],
+        data: [{label: '文本框', value: 'text'}, {label: '多行文本框', value: 'multitext'}, {
+            label: '单选框',
+            value: 'radio'
+        }, {label: '多选框', value: 'checkbox'}, {label: '日期选择框', value: 'date'}, {
+            label: '日期时间选择框',
+            value: 'datetime'
+        }, {label: '下拉框', value: 'list'}, {label: '富文本框', value: 'richbox'}],
         currValue: 'text',
         onSelect: function (v) {
-            vmAddFieldDialog.basicInfo.widgetType = v;
+            vmAddFieldDialog.data.widgetType = v;
         }
     },
     dataType: {
-        data: [{label: '字符串', value: 'string'}, {label: '短整数', value: 'int'}, {label: '整数', value: 'long'}, {label: '数字', value: 'double'}, {label: '日期', value: 'date'}, {label: '日期时间', value: 'datetime'}, {label: '时间', value: 'time'}],
+        data: [{label: '字符串', value: 'string'}, {label: '短整数', value: 'int'}, {
+            label: '整数',
+            value: 'long'
+        }, {label: '数字', value: 'double'}, {label: '日期', value: 'date'}, {
+            label: '日期时间',
+            value: 'datetime'
+        }, {label: '时间', value: 'time'}],
         currValue: 'string',
         onSelect: function (v) {
-            vmAddFieldDialog.basicInfo.dataType = v;
+            vmAddFieldDialog.data.dataType = v;
         }
     },
     cancelHandle: function () {
@@ -182,25 +214,50 @@ var vmAddFieldDialog = avalon.define({
         getMethod: "input",
         sysListinput: ""
     },
-    listOkHandle:function(){
-        this.interfaceAttr.options=this.fieldList.getMethod+':'+this.fieldList.sysListinput
+    listOkHandle: function () {
+        this.data.options = this.fieldList.getMethod + ':' + this.fieldList.sysListinput
     },
-    listCancelHandle:function(){
-        this.interfaceAttr.options=''
+    listCancelHandle: function () {
+        this.data.options = ''
     },
     setRules: function () {
         vmsetRulesDialog.open();
     },
-    listShow:false,
-    listShowHandle:function(){
-        this.listShow=!this.listShow;
+    listShow: false,
+    listShowHandle: function () {
+        this.listShow = !this.listShow;
     },
-    ruleShow:false,
-    ruleShowHandle:function(){
-        this.ruleShow=!this.ruleShow;
+    ruleShow: false,
+    ruleShowHandle: function () {
+        this.ruleShow = !this.ruleShow;
     },
-    rowlist:{
+    rulelist: {
+        internal: [],
+        Regex: '',
+        Script: '',
+        scriptChecked: '',
+        regChecked: ''
+    },
+    scriptCheckedfn: function (e) {
+        if (!e.target.checked) {
+            this.rulelist.Script = ''
+        }
+        console.log(this.rulelist.Script)
 
+    },
+    regCheckedfn: function (e) {
+        if (!e.target.checked) {
+            this.rulelist.Regex = ''
+        }
+        console.log(this.rulelist.Regex)
+
+    },
+    ruleOkHandle: function () {
+        console.log(this.rulelist.internal.join('&&') + '&&Regex=' + this.rulelist.Regex + '&&Script=' + this.rulelist.Script);
+        this.data.checkRule = this.rulelist.internal.join('&&') + '&&Regex=' + this.rulelist.Regex + '&&Script=' + this.rulelist.Script;
+    },
+    ruleCancelHandle: function () {
+        console.log();
     },
     validate: {
         onError: function (reasons) {
@@ -224,11 +281,35 @@ var vmAddFieldDialog = avalon.define({
                 console.log('全部通过');
                 vmAddFieldDialog.point = '全部通过';
                 vmAddFieldDialog.show = true;
+                var _url,_data;
+                if(vmAddFieldDialog.isEdit){
+                    _url='/model/' + vm.id + '/field/create';
+                    _data=delete vmAddFieldDialog.creator;
+                    _data['modifier']='dd';
+
+                }else{
+                    _url='/model/' + vm.id + '/field/'+vmAddFieldDialog._id+'/save'//需要查询接口返回的字段id
+                    _data=delete vmAddFieldDialog.modifier;
+                    _data['creator']='ff';
+                }
                 avalon.ajax({
-                    url: '/model/' + vm.id + '/field/create',//调用修改的接口
+                    url:_url ,//调用创建的接口
+                    type:'POST',
                     data: vmAddFieldDialog.data,
                     success: function (data, textStatus, XHR) {
-                        vmAddFieldDialog.data = data;
+                        //vmAddFieldDialog.data = data;
+
+                        vmAddFieldDialog.config.show = false;
+                        notice.open({
+                            type: 'success',
+                            content: '添加成功!'
+                        })
+                    },
+                    error: function () {
+                        notice.open({
+                            type: 'error',
+                            content: '添加失败!'
+                        })
                     }
                 });
             }
